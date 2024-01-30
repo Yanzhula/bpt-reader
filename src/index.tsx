@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import ReactDOM from 'react-dom/client';
 import { TemplateContext, SetTemplateContext } from './contexts/TemplateContext';
 import { Toolbar } from './components/Toolbar';
-import { TemplateView } from './components/TemplateView';
+import { Template } from './components/Template';
 
 const App: React.FC = () => {
 
@@ -14,7 +14,7 @@ const App: React.FC = () => {
         <Toolbar/>
       </SetTemplateContext.Provider>
       <TemplateContext.Provider value={template}>
-        <TemplateView/>
+        <Template/>
       </TemplateContext.Provider>
     </>;
 };

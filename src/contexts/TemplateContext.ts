@@ -1,5 +1,5 @@
 import { createContext } from 'react';
-import { Template } from '../types/Template';
+import { TemplateType } from '../types/Template';
 
-export const TemplateContext = createContext<null|Template>(null);
+export const TemplateContext = createContext<null|TemplateType>(null);
 export const SetTemplateContext = createContext<Function>(() => {});

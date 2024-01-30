@@ -1,6 +1,6 @@
-export type Template = {
+export type TemplateType = {
     VERSION: number,
-    TEMPLATE: Array<TemplateActivity>,
+    TEMPLATE: Array<TemplateActivityType>,
     PARAMETERS: Object,
     VARIABLES: Object,
     CONSTANTS: Object,
@@ -8,14 +8,14 @@ export type Template = {
 
 }
 
-export type TemplateActivity = {
+export type TemplateActivityType = {
     Type: string,
     Name: string,
-    Properties: TemplateActivityProperties,
-    Children: Array<TemplateActivity>,
+    Properties: TemplateActivityPropertiesType,
+    Children: Array<TemplateActivityType>,
 }
 
-export type TemplateActivityProperties = {
+export type TemplateActivityPropertiesType = {
     Title: string,
     [key: string]: any,
 }
