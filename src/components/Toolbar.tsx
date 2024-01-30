@@ -10,12 +10,7 @@ const MyBar = styled.div`
     border: 1px solid gray;
 `;
 
-require('php-unserialize');
-declare global {
-  interface Window {
-    PHPUnserialize?: any;
-  }
-}
+const phpUnserialize = require('phpunserialize');
 
 export const Toolbar: React.FC = () => {
     
@@ -36,7 +31,7 @@ export const Toolbar: React.FC = () => {
         (new Response(decompressedStream)).text().then(
             (bptContent) => {
 
-                const template = window.PHPUnserialize.unserialize(bptContent);
+                const template = phpUnserialize(bptContent);
                 
                 console.log(template);
                 setTemplate(template);

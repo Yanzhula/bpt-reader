@@ -9,7 +9,7 @@ const App: React.FC = () => {
   const [template, setTemplate] = useState(null);
 
   return <>
-      <h1>Template</h1>
+      <h1>.bpt file reader</h1>
       <SetTemplateContext.Provider value={setTemplate}>
         <Toolbar/>
       </SetTemplateContext.Provider>
