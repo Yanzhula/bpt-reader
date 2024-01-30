@@ -1,13 +1,21 @@
-import React, { useReducer } from 'react';
+import React, { useState } from 'react';
 import ReactDOM from 'react-dom/client';
-import { Toolbar } from './Toolbar';
+import { TemplateContext, SetTemplateContext } from './contexts/TemplateContext';
+import { Toolbar } from './components/Toolbar';
+import { TemplateView } from './components/TemplateView';
 
 const App: React.FC = () => {
 
-  return <>
-    <h1>Template</h1>
-    <Toolbar/>
+  const [template, setTemplate] = useState(null);
 
+  return <>
+      <h1>Template</h1>
+      <SetTemplateContext.Provider value={setTemplate}>
+        <Toolbar/>
+      </SetTemplateContext.Provider>
+      <TemplateContext.Provider value={template}>
+        <TemplateView/>
+      </TemplateContext.Provider>
     </>;
 };
 

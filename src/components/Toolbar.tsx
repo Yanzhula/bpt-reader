@@ -1,6 +1,6 @@
 import React, { ChangeEvent } from 'react';
 import { useContext } from 'react';
-import { TemplateContext } from './Template/TemplateContext';
+import { TemplateContext, SetTemplateContext } from '../contexts/TemplateContext';
 
 import styled from 'styled-components';
 
@@ -11,10 +11,15 @@ const MyBar = styled.div`
 `;
 
 require('php-unserialize');
+declare global {
+  interface Window {
+    PHPUnserialize?: any;
+  }
+}
 
 export const Toolbar: React.FC = () => {
-
-    const dispatchTemplate = useContext(TemplateContext);
+    
+    const setTemplate = useContext(SetTemplateContext);
 
     const onInput = (event: ChangeEvent<HTMLInputElement>): void => {
         const fileList = event.target?.files;
@@ -30,13 +35,13 @@ export const Toolbar: React.FC = () => {
 
         (new Response(decompressedStream)).text().then(
             (bptContent) => {
+
                 const template = window.PHPUnserialize.unserialize(bptContent);
                 
                 console.log(template);
-                // dispatchTemplate({ template });
+                setTemplate(template);
             },
         ).catch(e => console.log(e));
-
     }
 
     return <>
