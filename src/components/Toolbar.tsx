@@ -1,16 +1,14 @@
 import React, { ChangeEvent } from 'react';
 import { useContext } from 'react';
-import { TemplateContext, SetTemplateContext } from '../contexts/TemplateContext';
-
+import { SetTemplateContext } from '../contexts/TemplateContext';
 import styled from 'styled-components';
+import { readBptFile } from '../utils/BptFileReader';
 
 const MyBar = styled.div`
     border-radius: 8px;
     padding: 1em;
     border: 1px solid gray;
 `;
-
-const phpUnserialize = require('phpunserialize');
 
 export const Toolbar: React.FC = () => {
     
@@ -25,18 +23,10 @@ export const Toolbar: React.FC = () => {
             return;
         }
 
-        const ds = new DecompressionStream('deflate');
-        const decompressedStream = bptFile.stream().pipeThrough(ds);
-
-        (new Response(decompressedStream)).text().then(
-            (bptContent) => {
-
-                const template = phpUnserialize(bptContent);
-                
-                console.log(template);
-                setTemplate(template);
-            },
-        ).catch(e => console.log(e));
+        readBptFile(bptFile)
+            .then((template) => setTemplate(template))
+            .catch(e => console.log(e))
+        ;
     }
 
     return <>
