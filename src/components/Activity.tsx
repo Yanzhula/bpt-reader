@@ -9,9 +9,6 @@ const ActivityBlock = styled.div`
 `;
 
 const ChildrenBlock = styled.div<{ $parallel?: boolean; }>`
-    // border: 1px dashed gray;
-    // border-radius: 6px;
-    // padding: 1em;
     display: flex;
     flex-direction: column;
     align-items: start;
@@ -19,6 +16,9 @@ const ChildrenBlock = styled.div<{ $parallel?: boolean; }>`
     ${props => props.$parallel && css`
         flex-direction: row;
         column-gap: 1em;
+        border: 1px dashed gray;
+        border-radius: 6px;
+        padding: 5px;
     `}
 `;
 
@@ -45,7 +45,7 @@ export const Activity: React.FC<{ activity: TemplateActivityType }> = ({ activit
         <ActivityBlock>
             {!isSystem && <ActivityContainer>
                 <ActivityTitle>{activity.Properties.Title}</ActivityTitle>
-                <p>Type: {activity.Type}</p>
+                {/* <p>Type: {activity.Type}</p> */}
                 {/* <p>Id: {activity.Name}</p> */}
             </ActivityContainer>}
             {
