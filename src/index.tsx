@@ -13,6 +13,7 @@ const App: React.FC = () => {
       <SetTemplateContext.Provider value={setTemplate}>
         <Toolbar/>
       </SetTemplateContext.Provider>
+      <p style={{height: '50px'}}></p>
       <TemplateContext.Provider value={template}>
         <Template/>
       </TemplateContext.Provider>

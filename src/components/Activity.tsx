@@ -19,11 +19,12 @@ const ChildrenBlock = styled.div<{ $parallel?: boolean; }>`
         border: 1px dashed gray;
         border-radius: 6px;
         padding: 5px;
+        margin: 1em;
     `}
 `;
 
 const ActivityContainer = styled.div`
-    width: 300px;
+    width: 200px;
     // height: 50px;
     border: 1px solid gray;
     border-radius: 6px;
@@ -31,7 +32,12 @@ const ActivityContainer = styled.div`
 `;
 
 const ActivityTitle = styled.p`
-    font-weight: bold;
+    font-weight: normal;
+    font-size: 12px;
+    padding: 6px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
 `;
 
 export const Activity: React.FC<{ activity: TemplateActivityType }> = ({ activity }) => {
