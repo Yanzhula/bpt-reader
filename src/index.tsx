@@ -1,30 +1,35 @@
-import React, { useState } from 'react';
-import ReactDOM from 'react-dom/client';
-import { TemplateContext, SetTemplateContext } from './contexts/TemplateContext';
-import { Toolbar } from './components/Toolbar';
-import { Template } from './components/Template';
-import Container from 'react-bootstrap/Container';
+import React, { useState } from "react";
+import ReactDOM from "react-dom/client";
+import {
+  TemplateContext,
+  SetTemplateContext,
+} from "./contexts/TemplateContext";
+import { Toolbar } from "./components/Toolbar";
+import { Template } from "./components/Template";
+import Container from "react-bootstrap/Container";
 
-import 'bootstrap/dist/css/bootstrap.min.css';
+import "bootstrap/dist/css/bootstrap.min.css";
 
 const App: React.FC = () => {
-
   const [template, setTemplate] = useState(null);
 
-  return <>
+  return (
+    <>
       <Container>
         <h1>.bpt file reader</h1>
       </Container>
       <SetTemplateContext.Provider value={setTemplate}>
-        <Toolbar/>
+        <Toolbar />
       </SetTemplateContext.Provider>
-      <p style={{height: '50px'}}></p>
       <TemplateContext.Provider value={template}>
-        <Template/>
+        <Template />
       </TemplateContext.Provider>
-    </>;
+    </>
+  );
 };
 
-const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
+const root = ReactDOM.createRoot(
+  document.getElementById("root") as HTMLElement
+);
 
 root.render(<App />);

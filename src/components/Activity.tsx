@@ -23,7 +23,7 @@ const ChildrenBlock = styled.div<{ $parallel?: boolean }>`
       border: 1px dashed gray;
       border-radius: 6px;
       padding: 5px;
-      // margin: 1em;
+      margin-bottom: 1em;
     `}
 `;
 
@@ -46,7 +46,7 @@ export const Activity: React.FC<{ activity: TemplateActivityType }> = ({
         <Card
           bg={parallel ? "warning" : ""}
           border={parallelBranch ? "warning" : ""}
-          style={{ width: parallel ? "auto" : "18rem", margin: "1em auto" }}
+          style={{ width: parallel ? "auto" : "18rem", margin: "0 auto 1em" }}
         >
           {!parallelBranch && <Card.Header>{activity.Type}</Card.Header>}
           <Card.Body>
