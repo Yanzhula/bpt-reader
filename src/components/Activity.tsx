@@ -21,7 +21,7 @@ const ChildrenBlock = styled.div<{ $parallel?: boolean; }>`
         border: 1px dashed gray;
         border-radius: 6px;
         padding: 5px;
-        margin: 1em;
+        // margin: 1em;
     `}
 `;
 
@@ -29,16 +29,25 @@ export const Activity: React.FC<{ activity: TemplateActivityType }> = ({ activit
 
     const children = activity.Children;
 
-    const isSystem = activity.Type === 'EmptyBlockActivity' || activity.Type === 'SequenceActivity';
+    const isSystem = 
+        activity.Type === 'EmptyBlockActivity'
+        || activity.Type === 'SequenceActivity'
+        || activity.Type === 'SequentialWorkflowActivity'
+    ;
     const parallel = activity.Type === 'IfElseActivity' || activity.Type === 'ApproveActivity';
+    const parallelBranch = activity.Type === 'IfElseBranchActivity';
 
     return (
         <ActivityBlock>
             {
             !isSystem
             &&
-            <Card style={{ width: '18rem', margin: '1em auto' }}>
-                <Card.Header>{activity.Type}</Card.Header>
+            <Card
+             bg={parallel ? 'warning' : ''}
+             border={parallelBranch ? 'warning' : ''}
+             style={{ width: parallel ? 'auto' : '18rem', margin: '1em auto' }}
+            >
+                {!parallelBranch && <Card.Header>{activity.Type}</Card.Header>}
                 <Card.Body>
                     <Card.Text>
                         {activity.Properties.Title}
