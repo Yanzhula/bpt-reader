@@ -4,6 +4,8 @@ import { TemplateContext, SetTemplateContext } from './contexts/TemplateContext'
 import { Toolbar } from './components/Toolbar';
 import { Template } from './components/Template';
 
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 const App: React.FC = () => {
 
   const [template, setTemplate] = useState(null);

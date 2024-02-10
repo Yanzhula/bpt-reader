@@ -13,8 +13,8 @@ module.exports = {
     },
   },
   performance: {
-    maxEntrypointSize: 512000,
-    maxAssetSize: 512000
+    maxEntrypointSize: 1024000,
+    maxAssetSize: 1024000
   },
   resolve: {
     extensions: ['.tsx', '.ts', '.js']
@@ -25,6 +25,10 @@ module.exports = {
         test: /\.(ts|tsx)$/,
         exclude: /node_modules/,
         use: 'babel-loader'
+      },
+      {
+        test: /\.css$/i,
+        use: ["style-loader", "css-loader"],
       },
     ],
   },
