@@ -2,6 +2,8 @@ import React from 'react';
 import { TemplateActivityType } from '../types/Template';
 import { styled, css } from 'styled-components';
 
+import Toast from 'react-bootstrap/Toast';
+
 const ActivityBlock = styled.div`
     // border: 1px dashed gray;
     // border-radius: 6px;
@@ -49,11 +51,16 @@ export const Activity: React.FC<{ activity: TemplateActivityType }> = ({ activit
 
     return (
         <ActivityBlock>
-            {!isSystem && <ActivityContainer>
-                <ActivityTitle>{activity.Properties.Title}</ActivityTitle>
-                {/* <p>Type: {activity.Type}</p> */}
-                {/* <p>Id: {activity.Name}</p> */}
-            </ActivityContainer>}
+            {
+            !isSystem
+            && <Toast style={{ margin: '1em auto' }}>
+                <Toast.Header>
+                    <img src="holder.js/20x20?text=%20" className="rounded me-2" alt="" />
+                    <strong className="me-auto">{activity.Type}</strong>
+                </Toast.Header>
+                <Toast.Body>{activity.Properties.Title}</Toast.Body>
+            </Toast>
+            }
             {
                 children.length > 0 
                 && <ChildrenBlock $parallel = {$parallel}>
