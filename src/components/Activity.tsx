@@ -2,7 +2,7 @@ import React from 'react';
 import { TemplateActivityType } from '../types/Template';
 import { styled, css } from 'styled-components';
 
-import Toast from 'react-bootstrap/Toast';
+import Card from 'react-bootstrap/Card';
 
 const ActivityBlock = styled.div`
     // border: 1px dashed gray;
@@ -25,45 +25,30 @@ const ChildrenBlock = styled.div<{ $parallel?: boolean; }>`
     `}
 `;
 
-const ActivityContainer = styled.div`
-    width: 200px;
-    // height: 50px;
-    border: 1px solid gray;
-    border-radius: 6px;
-    margin: 1em auto 0;
-`;
-
-const ActivityTitle = styled.p`
-    font-weight: normal;
-    font-size: 12px;
-    padding: 6px;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    overflow: hidden;
-`;
-
 export const Activity: React.FC<{ activity: TemplateActivityType }> = ({ activity }) => {
 
     const children = activity.Children;
 
     const isSystem = activity.Type === 'EmptyBlockActivity' || activity.Type === 'SequenceActivity';
-    const $parallel = activity.Type === 'IfElseActivity' || activity.Type === 'ApproveActivity';
+    const parallel = activity.Type === 'IfElseActivity' || activity.Type === 'ApproveActivity';
 
     return (
         <ActivityBlock>
             {
             !isSystem
-            && <Toast style={{ margin: '1em auto' }}>
-                <Toast.Header>
-                    <img src="holder.js/20x20?text=%20" className="rounded me-2" alt="" />
-                    <strong className="me-auto">{activity.Type}</strong>
-                </Toast.Header>
-                <Toast.Body>{activity.Properties.Title}</Toast.Body>
-            </Toast>
+            &&
+            <Card style={{ width: '18rem', margin: '1em auto' }}>
+                <Card.Header>{activity.Type}</Card.Header>
+                <Card.Body>
+                    <Card.Text>
+                        {activity.Properties.Title}
+                    </Card.Text>
+                </Card.Body>
+            </Card>
             }
             {
                 children.length > 0 
-                && <ChildrenBlock $parallel = {$parallel}>
+                && <ChildrenBlock $parallel = {parallel}>
                     {children.map(child => <Activity key={child.Name} activity={child} />)}            
                 </ChildrenBlock>
             }
