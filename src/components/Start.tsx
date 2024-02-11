@@ -1,22 +1,10 @@
 import React from "react";
-import styled from "styled-components";
-
-const StartElement = styled.div`
-  width: 70px;
-  height: 70px;
-  border-radius: 35px;
-  line-height: 70px;
-  text-align: center;
-  background: green;
-  font-size: 40px;
-  color: white;
-  margin: 20px auto;
-`;
+import Alert from "react-bootstrap/Alert";
 
 export const Start: React.FC = () => {
   return (
-    <StartElement>
-      <span>▶</span>
-    </StartElement>
+    <Alert variant="primary" style={{ width: "18rem", margin: "1em auto" }}>
+      ▶ Start
+    </Alert>
   );
 };
