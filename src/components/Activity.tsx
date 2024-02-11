@@ -3,6 +3,7 @@ import { TemplateActivityType } from "../types/Template";
 import { styled, css } from "styled-components";
 
 import Card from "react-bootstrap/Card";
+import { ActivitySettings } from "./ActivitySettings";
 
 const ActivityBlock = styled.div`
   // border: 1px dashed gray;
@@ -48,9 +49,23 @@ export const Activity: React.FC<{ activity: TemplateActivityType }> = ({
           border={parallelBranch ? "warning" : ""}
           style={{ width: parallel ? "auto" : "18rem", margin: "0 auto 1em" }}
         >
-          {!parallelBranch && <Card.Header>{activity.Type}</Card.Header>}
+          {!parallelBranch && (
+            <Card.Header>
+              {activity.Type}{" "}
+              <small style={{ float: "right" }}>
+                <ActivitySettings activity={activity} />
+              </small>
+            </Card.Header>
+          )}
           <Card.Body>
-            <Card.Text>{activity.Properties.Title}</Card.Text>
+            <Card.Text>
+              {activity.Properties.Title}
+              {parallelBranch && (
+                <small style={{ float: "right" }}>
+                  <ActivitySettings activity={activity} />
+                </small>
+              )}
+            </Card.Text>
           </Card.Body>
         </Card>
       )}
