@@ -6,12 +6,10 @@ import Card from "react-bootstrap/Card";
 import { ActivitySettings } from "./ActivitySettings";
 
 const ActivityBlock = styled.div`
-  // border: 1px dashed gray;
-  // border-radius: 6px;
   margin: 0 auto;
 `;
 
-const ChildrenBlock = styled.div<{ $parallel?: boolean }>`
+const ChildrenBlock = styled.div<{ $parallel?: boolean; $block?: boolean }>`
   display: flex;
   flex-direction: column;
   align-items: start;
@@ -21,11 +19,29 @@ const ChildrenBlock = styled.div<{ $parallel?: boolean }>`
     css`
       flex-direction: row;
       column-gap: 1em;
+    `}
+
+  ${(props) =>
+    (props.$parallel || props.$block) &&
+    css`
+      margin-top: -3em;
+      margin-bottom: 1em;
+      padding: 3em 1em 1em;
       border: 1px dashed gray;
       border-radius: 6px;
-      padding: 5px;
-      margin-bottom: 1em;
     `}
+`;
+
+const ActivityTitle = styled.div`
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+`;
+
+const ActivitySettingsWrap = styled.small`
+  position: absolute;
+  top: 10px;
+  right: 10px;
 `;
 
 export const Activity: React.FC<{ activity: TemplateActivityType }> = ({
@@ -34,7 +50,6 @@ export const Activity: React.FC<{ activity: TemplateActivityType }> = ({
   const children = activity.Children;
 
   const isSystem =
-    activity.Type === "EmptyBlockActivity" ||
     activity.Type === "SequenceActivity" ||
     activity.Type === "SequentialWorkflowActivity";
   const parallel =
@@ -52,25 +67,28 @@ export const Activity: React.FC<{ activity: TemplateActivityType }> = ({
           {!parallelBranch && (
             <Card.Header>
               {activity.Type}{" "}
-              <small style={{ float: "right" }}>
+              <ActivitySettingsWrap>
                 <ActivitySettings activity={activity} />
-              </small>
+              </ActivitySettingsWrap>
             </Card.Header>
           )}
           <Card.Body>
             <Card.Text>
-              {activity.Properties.Title}
+              <ActivityTitle>{activity.Properties.Title}</ActivityTitle>
               {parallelBranch && (
-                <small style={{ float: "right" }}>
+                <ActivitySettingsWrap>
                   <ActivitySettings activity={activity} />
-                </small>
+                </ActivitySettingsWrap>
               )}
             </Card.Text>
           </Card.Body>
         </Card>
       )}
       {children && children.length > 0 && (
-        <ChildrenBlock $parallel={parallel}>
+        <ChildrenBlock
+          $parallel={parallel}
+          $block={activity.Type === "EmptyBlockActivity"}
+        >
           {children.map((child) => (
             <Activity key={child.Name} activity={child} />
           ))}
