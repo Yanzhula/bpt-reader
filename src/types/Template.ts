@@ -17,5 +17,6 @@ export type TemplateActivityType = {
 
 export type TemplateActivityPropertiesType = {
     Title: string,
+    _DesMinimized: 'N' | 'Y',
     [key: string]: any,
 }
