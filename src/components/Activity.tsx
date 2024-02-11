@@ -26,7 +26,7 @@ const ChildrenBlock = styled.div<{ $parallel?: boolean; $block?: boolean }>`
     css`
       margin-top: -3em;
       margin-bottom: 1em;
-      padding: 3em 1em 1em;
+      padding: 3em 1em 0;
       border: 1px dashed gray;
       border-radius: 6px;
     `}
@@ -66,7 +66,7 @@ export const Activity: React.FC<{ activity: TemplateActivityType }> = ({
         >
           {!parallelBranch && (
             <Card.Header>
-              {activity.Type}{" "}
+              {activity.Type}
               <ActivitySettingsWrap>
                 <ActivitySettings activity={activity} />
               </ActivitySettingsWrap>
